@@ -31,6 +31,11 @@ public class Main extends Application {
 		stage.show();
 	}
 
+	// Required to create the executable.
+	public static void main(String[] args) {
+		Application.launch(Main.class, args);
+	}
+
 	@Override
 	public void stop() {
 		springContext.close();
