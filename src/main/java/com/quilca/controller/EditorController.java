@@ -1,11 +1,12 @@
 package com.quilca.controller;
 
+import com.quilca.model.TextStyle;
 import com.quilca.service.EditorService;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import org.fxmisc.flowless.VirtualizedScrollPane;
-import org.fxmisc.richtext.InlineCssTextArea;
+import org.fxmisc.richtext.StyledTextArea;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -21,11 +22,12 @@ public class EditorController {
     public EditorController(EditorService editorService) {
         this.editorService = editorService;
     }
-    private final InlineCssTextArea editorArea = new InlineCssTextArea();
+
     @FXML
     public void initialize(){
-        editorArea.setWrapText(true);
-        VirtualizedScrollPane<InlineCssTextArea> scroll = new VirtualizedScrollPane<>(editorArea);
+        VirtualizedScrollPane<StyledTextArea<TextStyle, TextStyle>> scroll = new VirtualizedScrollPane<>(
+                editorService.getEditorArea()
+        );
         editorContainer.getChildren().add(scroll);
     }
 
@@ -33,9 +35,9 @@ public class EditorController {
     public void handleSave() {
         FileChooser chooser = new FileChooser();
         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Text files", "*.txt"));
-        File file = chooser.showSaveDialog(editorArea.getScene().getWindow());
+        File file = chooser.showSaveDialog(editorService.getEditorArea().getScene().getWindow());
         if (file != null) {
-            String content = editorArea.getText();
+            String content = editorService.getEditorArea().getText();
             editorService.saveText(file.getAbsolutePath(), content);
         }
     }
@@ -43,11 +45,11 @@ public class EditorController {
     @FXML
     private void handleRead() {
         FileChooser chooser = new FileChooser();
-        File file = chooser.showOpenDialog(editorArea.getScene().getWindow());
+        File file = chooser.showOpenDialog(editorService.getEditorArea().getScene().getWindow());
 
         if (file != null) {
             String content = editorService.readText(file.getAbsolutePath());
-            editorArea.replaceText(content);
+            editorService.getEditorArea().replaceText(content);
         }
     }
 }
