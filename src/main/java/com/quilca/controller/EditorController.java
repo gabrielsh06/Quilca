@@ -1,28 +1,27 @@
 package com.quilca.controller;
 
-import com.quilca.model.TextStyle;
 import com.quilca.service.EditorService;
 import javafx.fxml.FXML;
 import javafx.scene.layout.StackPane;
 import org.fxmisc.flowless.VirtualizedScrollPane;
-import org.fxmisc.richtext.StyledTextArea;
-import org.springframework.stereotype.Component;
+import org.fxmisc.richtext.StyleClassedTextArea;
+import org.springframework.stereotype.Controller;
 
-@Component
+@Controller
 public class EditorController {
 
     private final EditorService editorService;
-
-    @FXML
-    private StackPane editorContainer;
 
     public EditorController(EditorService editorService) {
         this.editorService = editorService;
     }
 
     @FXML
-    public void initialize(){
-        VirtualizedScrollPane<StyledTextArea<TextStyle, TextStyle>> scroll = new VirtualizedScrollPane<>(
+    private StackPane editorContainer;
+
+    @FXML
+    public void initialize() {
+        VirtualizedScrollPane<StyleClassedTextArea> scroll = new VirtualizedScrollPane<>(
                 editorService.getEditorArea()
         );
         editorContainer.getChildren().add(scroll);

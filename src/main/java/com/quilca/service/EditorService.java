@@ -2,62 +2,59 @@ package com.quilca.service;
 
 import com.quilca.model.TextStyle;
 import javafx.scene.control.IndexRange;
-import org.fxmisc.richtext.StyledTextArea;
-import org.fxmisc.richtext.model.SimpleEditableStyledDocument;
+import org.fxmisc.richtext.StyleClassedTextArea;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.function.UnaryOperator;
 
 @Service
 public class EditorService {
 
-    private StyledTextArea<TextStyle, TextStyle> editorArea;
+    private StyleClassedTextArea editorArea;
 
     public EditorService() {}
 
-    public StyledTextArea<TextStyle, TextStyle> getEditorArea() {
+    public StyleClassedTextArea getEditorArea() {
         if (editorArea == null) {
-            editorArea = new StyledTextArea<>(
-                    TextStyle.forDefault(),
-                    (text, style) -> {},
-                    TextStyle.forDefault(),
-                    (text, style) -> {
-                        StringBuilder sb = new StringBuilder();
-                        if (style.bold()) sb.append("-fx-font-weight: bold;");
-                        if (style.italic()) sb.append("-fx-font-style: italic;");
-                        if (style.size() > 0) sb.append("-fx-font-size: ").append(style.size()).append("px;");
-                        if (style.color() != null) sb.append("-fx-fill: ").append(style.color()).append(";");
-                        text.setStyle(sb.toString());
-                    },
-                    new SimpleEditableStyledDocument<>(TextStyle.forDefault(), TextStyle.forDefault()),
-                    true
-            );
+            editorArea = new StyleClassedTextArea();
+            editorArea.setWrapText(true);
+            editorArea.setTextInsertionStyle(Set.of("size-12"));
         }
         return editorArea;
     }
 
     public void applyStyle(UnaryOperator<TextStyle> styleUpdater) {
+        if (editorArea == null) return;
         IndexRange selection = editorArea.getSelection();
         if (selection.getLength() > 0) {
-            TextStyle current = editorArea.getStyleAtPosition(selection.getStart());
-            editorArea.setStyle(selection.getStart(), selection.getEnd(), styleUpdater.apply(current));
+            editorArea.setStyleSpans(selection.getStart(),
+                    editorArea.getStyleSpans(selection.getStart(), selection.getEnd())
+                            .mapStyles(current -> {
+                                TextStyle currentStyle = new TextStyle(new HashSet<>(current));
+                                return styleUpdater.apply(currentStyle).classes();
+                            })
+            );
         } else {
-            TextStyle current = editorArea.getTextInsertionStyle();
-            if (current == null) current = TextStyle.forDefault();
-            editorArea.setTextInsertionStyle(styleUpdater.apply(current));
+            Collection<String> current = editorArea.getTextInsertionStyle();
+            TextStyle currentStyle = current == null ? TextStyle.forDefault() : new TextStyle(new HashSet<>(current));
+            TextStyle newStyle = styleUpdater.apply(currentStyle);
+            editorArea.setTextInsertionStyle(newStyle.classes());
         }
     }
 
     // Selection styles
     public void toggleBold() {
-        applyStyle(style -> style.withBold(!style.bold()));
+        applyStyle(style -> style.withBold(!style.isBold()));
     }
 
     public void toggleItalic() {
-        applyStyle(style -> style.withItalic(!style.italic()));
+        applyStyle(style -> style.withItalic(!style.isItalic()));
     }
 
     public void setSize(int size) {
