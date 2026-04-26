@@ -1,0 +1,24 @@
+.bold { -fx-font-weight: bold; }
+.italic { -fx-font-style: italic; }
+
+.size-9 { -fx-font-size: 9pt; }
+.size-10 { -fx-font-size: 10pt; }
+.size-12 { -fx-font-size: 12pt; }
+.size-14 { -fx-font-size: 14pt; }
+.size-16 { -fx-font-size: 16pt; }
+.size-18 { -fx-font-size: 18pt; }
+.size-24 { -fx-font-size: 24pt; }
+.size-36 { -fx-font-size: 36pt; }
+
+.color-black { -fx-fill: black; }
+.color-white { -fx-fill: white; }
+.color-red { -fx-fill: #FF0000; }
+.color-dark-red { -fx-fill: #C00000; }
+.color-orange { -fx-fill: #FF6600; }
+.color-yellow { -fx-fill: #FFD700; }
+.color-green { -fx-fill: #00B050; }
+.color-dark-green { -fx-fill: #375623; }
+.color-blue { -fx-fill: #0070C0; }
+.color-dark-blue { -fx-fill: #002060; }
+.color-purple { -fx-fill: #7030A0; }
+.color-gray { -fx-fill: #808080; }
