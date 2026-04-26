@@ -5,5 +5,5 @@
 
 <VBox fx:id="sidebar" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
 
-    <TreeView VBox.vgrow="ALWAYS" />
+    <TreeView fx:id="treeView" VBox.vgrow="ALWAYS" />
 </VBox>
