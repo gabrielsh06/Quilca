@@ -4,11 +4,11 @@ import com.quilca.service.EditorService;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
 import javafx.stage.FileChooser;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.io.File;
 
-@Component
+@Controller
 public class TopBarController {
 
     private final HostServices hostServices;
