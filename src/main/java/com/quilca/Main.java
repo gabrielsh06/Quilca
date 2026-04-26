@@ -11,6 +11,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.io.IOException;
+import java.util.Objects;
 
 @SpringBootApplication
 public class Main extends Application {
@@ -29,9 +30,13 @@ public class Main extends Application {
 
 	@Override
 	public void start(Stage stage) throws IOException {
-		FXMLLoader loader = new FXMLLoader(Main.class.getResource("/fxml/main-layout.fxml"));
+		FXMLLoader loader = new FXMLLoader(Main.class.getResource("/com.quilca/view/main-layout.fxml"));
 		loader.setControllerFactory(springContext::getBean);
 		Scene scene = new Scene(loader.load());
+		scene.getStylesheets().add(Objects.requireNonNull(getClass()
+				.getResource("/com.quilca/styles/editor-styles.css")).toExternalForm());
+		scene.getStylesheets().add(Objects.requireNonNull(getClass()
+				.getResource("/com.quilca/styles/layout-styles.css")).toExternalForm());
 		stage.setTitle("Quilca");
 		stage.setMaximized(true);
 		stage.setScene(scene);
