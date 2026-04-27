@@ -3,6 +3,7 @@ package com.quilca.controller;
 import com.quilca.service.EditorService;
 import javafx.application.HostServices;
 import javafx.fxml.FXML;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import org.springframework.stereotype.Controller;
 
@@ -13,6 +14,7 @@ public class TopBarController {
 
     private final HostServices hostServices;
     private final EditorService editorService;
+    public HBox topbar;
 
     public TopBarController(HostServices hostServices, EditorService editorService) {
         this.hostServices = hostServices;
