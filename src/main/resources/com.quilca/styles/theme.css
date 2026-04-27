@@ -1,0 +1,39 @@
+.root {
+    /* Color Palette */
+    -fx-quilca-bg-primary: #121212;
+    -fx-quilca-bg-secondary: #2c2c2c;
+    -fx-quilca-bg-tertiary: #444444;
+    -fx-quilca-text-primary: #e0e0e0;
+    -fx-quilca-text-secondary: #b0b0b0;
+    -fx-quilca-hover: #888888;
+}
+
+/* --- Main Containers --- */
+#topbar {
+    -fx-background-color: -fx-quilca-bg-primary;
+}
+
+/* Grouping background colors for bar, dropdowns, and items */
+#topbar .menu-bar,
+#topbar .context-menu,
+#topbar .menu-item {
+    -fx-background-color: -fx-quilca-bg-secondary;
+}
+
+/* --- Labels and Typography --- */
+#topbar .label {
+    -fx-text-fill: -fx-quilca-text-primary;
+}
+
+/* --- Interaction States (Hover, Focus, and Showing) --- */
+#topbar .menu:hover,
+#topbar .menu:showing,
+#topbar .menu:focused,
+#topbar .menu-item:hover,
+#topbar .menu-item:focused {
+    -fx-background-color: -fx-quilca-hover;
+}
+
+#topbar .menu {
+    -fx-background-color: transparent;
+}

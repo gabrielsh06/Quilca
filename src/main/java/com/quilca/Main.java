@@ -37,6 +37,8 @@ public class Main extends Application {
 				.getResource("/com.quilca/styles/editor-styles.css")).toExternalForm());
 		scene.getStylesheets().add(Objects.requireNonNull(getClass()
 				.getResource("/com.quilca/styles/layout-styles.css")).toExternalForm());
+		scene.getStylesheets().add(Objects.requireNonNull(getClass()
+				.getResource("/com.quilca/styles/theme.css")).toExternalForm());
 		stage.setTitle("Quilca");
 		stage.setMaximized(true);
 		stage.setScene(scene);
