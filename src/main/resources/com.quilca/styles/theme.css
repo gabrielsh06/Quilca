@@ -1,0 +1,102 @@
+.root {
+    /* Color Palette */
+    -fx-quilca-bg-primary: #121212;
+    -fx-quilca-bg-secondary: #2c2c2c;
+    -fx-quilca-bg-tertiary: #444444;
+    -fx-quilca-bg-rich: #363636;
+    -fx-quilca-text-primary: #e0e0e0;
+    -fx-quilca-text-secondary: #b0b0b0;
+    -fx-quilca-separator: #000000;
+    -fx-quilca-hover: #515151;
+}
+
+.separator {
+    -fx-background-color: -fx-quilca-separator;
+}
+.separator .line {
+    -fx-border-color: -fx-quilca-separator;
+    -fx-border-width: 1;
+}
+
+
+/* --- Topbar Containers --- */
+#topbar {
+    -fx-background-color: -fx-quilca-bg-secondary;
+}
+
+/* Grouping background colors for bar, dropdowns, and items */
+#topbar .menu-bar,
+#topbar .context-menu,
+#topbar .menu-item {
+    -fx-background-color: -fx-quilca-bg-secondary;
+}
+
+/* --- Labels and Typography --- */
+#topbar .label {
+    -fx-text-fill: -fx-quilca-text-primary;
+}
+
+/* --- Interaction States (Hover, Focus, and Showing) --- */
+#topbar .menu:hover,
+#topbar .menu:showing,
+#topbar .menu:focused,
+#topbar .menu-item:hover,
+#topbar .menu-item:focused {
+    -fx-background-color: -fx-quilca-hover;
+}
+
+#topbar .container-tools {
+    -fx-border-width: 1 0 1 0;
+    -fx-border-color: -fx-quilca-separator;
+}
+
+#topbar .menu {
+    -fx-background-color: transparent;
+}
+
+
+
+/* --- Sidebar Containers --- */
+#sidebar {
+    -fx-background-color: -fx-quilca-bg-secondary;
+}
+
+
+
+/* --- FormatBar Containers --- */
+#formatBar {
+    -fx-background-color: -fx-quilca-bg-secondary;
+    -fx-spacing: 5px;
+    -fx-padding: 5;
+}
+#formatBar .button,
+#formatBar .combo-box,
+#formatBar .toggle-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 10;
+    -fx-border-color: transparent;
+}
+#formatBar .button:hover,
+#formatBar .toggle-button:hover,
+#formatBar .toggle-button:selected {
+    -fx-background-color: -fx-quilca-hover;
+}
+
+#formatBar .button,
+#formatBar .combo-box,
+#formatBar .combo-box .list-cell,
+#formatBar .toggle-button {
+    -fx-text-fill: -fx-quilca-text-primary;
+}
+
+
+
+/* --- Editor Containers --- */
+#editor {
+    -fx-background-color: -fx-quilca-bg-primary;
+}
+
+/* --- SideBar Containers --- */
+#statusBar {
+    -fx-background-color: -fx-quilca-bg-secondary;
+}

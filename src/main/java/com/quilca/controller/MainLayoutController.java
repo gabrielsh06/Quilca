@@ -1,0 +1,29 @@
+package com.quilca.controller;
+
+import javafx.application.Platform;
+import javafx.fxml.FXML;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import org.springframework.stereotype.Controller;
+
+@Controller
+public class MainLayoutController {
+
+    public HBox statusBar;
+    public VBox editor;
+    @FXML
+    private BorderPane mainLayout;
+    @FXML
+    private StatusBarController statusBarController;
+    @FXML
+    private VBox sidebar;
+
+    @FXML
+    public void initialize() {
+        Platform.runLater(() -> sidebar.prefWidthProperty().bind(
+                mainLayout.widthProperty().multiply(0.25)
+        ));
+        statusBarController.setRootLayout(mainLayout);
+    }
+}
